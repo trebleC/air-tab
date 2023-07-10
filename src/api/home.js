@@ -1,6 +1,6 @@
 import {request} from './request'
 export const getTab = ()=>{
     return request({
-        url:'/getTab'
+        url:'/getTabs'
     })
 }

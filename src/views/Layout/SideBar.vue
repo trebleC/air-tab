@@ -24,8 +24,8 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import {getTab} from '@/api/home'
 export default {
     name: 'SideBar',
-    setup() {
-        const navKey = ref('todo')
+    setup(props,ctx) {
+        const navKey = ref('')
         const navList = ref([[
             {
                 name: '待办',
@@ -48,12 +48,13 @@ export default {
         ]])
         const onNav = (nav) => {
             navKey.value = nav.key
+            ctx.emit('navChang',nav.key)
         }
 
         getTab().then(res => {
             navList.value.unshift(res.data)
+            onNav(navList.value[0][0])
         })
-        // console.log(navList.value)
 
         return {
             navKey,
@@ -125,6 +126,7 @@ export default {
         }
     }
     .version{
+        text-align: center;
         .name{
             color: #3880ff;
             font-size: 14px;

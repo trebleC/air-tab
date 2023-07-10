@@ -13,13 +13,18 @@ module.exports = defineConfig({
     devServer: {
       proxy: {
         '/dev': {
-          target: 'http://127.0.0.1:4523/m1/2424270-0-default',
+          target: 'http://localhost:4000',
           ws: true,
           changeOrigin: true,
           pathRewrite: {
             "^/dev": "",
           },
         },
-      }
+        '/song': {
+          target: 'http://localhost:4000',
+          ws: true,
+          changeOrigin: true,
+        },
+      },
     }
 })
